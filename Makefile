@@ -9,5 +9,4 @@ up-server:
 	python manage.py run
 
 
-
-.PHONY: clean up-server
+.PHONY: clean up-server 
