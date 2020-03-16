@@ -8,3 +8,13 @@ class InteractionDto:
         'input_db': fields.String(required=True, description='input'),
         'output_db': fields.String(required=True, description='output'),
     })
+
+class CommandDto:
+    api = Namespace('command', description='commands')
+    command = api.model('command', {
+        'user_name': fields.String(required=False, description='user name'),
+        'name': fields.String(required=False, description='name'),
+        'last_name': fields.String(required=False, description='last name'),
+        'social_network_id':fields.String(required=False, description='last name'),
+        'command':fields.String(required=True, description='last name'),
+    })
