@@ -128,6 +128,7 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+flask_boilerplate_main.db
 
 # Pyre type checker
 .pyre/
@@ -141,3 +142,4 @@ cython_debug/
 # static files generated from Django application using `collectstatic`
 media
 static
+migrations/
