@@ -20,3 +20,4 @@ class CommandDto:
         'social_network_id': fields.String(required=False, description='last name'),
         'command': fields.String(required=True, description='last name'),
     })
+

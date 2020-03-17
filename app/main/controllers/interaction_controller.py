@@ -16,11 +16,11 @@ class InteractionList(Resource):
         """List all registered interactions"""
         return get_all_interactions()
 
-    # @api.response(201, 'Interaction successfully created.')
-    # @api.doc('create a new interaction')
-    # @api.expect(_interaction, validate=True)
-    # def post(self):
-    #     """Creates a new Interaction """
-    #     data = request.json
-    #     return save_new_interaction(data=data)
+    @api.response(201, 'Interaction successfully created.')
+    @api.doc('create a new interaction')
+    @api.expect(_interaction, validate=True)
+    def post(self):
+        """Creates a new Interaction """
+        data = request.json
+        return save_new_interaction(data=data)
 
