@@ -2,8 +2,9 @@ from flask import request
 from flask_restplus import Resource
 
 from ..util.dto import CommandDto
-from ..util.commands import get_all_commands
+from ..util.commands import get_all_commands,commands
 from ..services.user_service import *
+from ..services.interaction_service import *
 
 api = CommandDto.api
 _command = CommandDto.command
@@ -24,10 +25,14 @@ class CommandList(Resource):
         """Creates a new Interaction """
         data = request.json
         user = {"user_name": data['user_name'],
-                "name":data['name'],
+                "name": data['name'],
                 "last_name": data['last_name'],
-                "social_network_id":data['social_network_id'],
-        }
-        return save_new_user(data=user)
+                "social_network_id": data['social_network_id'],
+                }
         
+        check = save_new_user(data=user)
+        commands(data['command'])
+        return check
+        
+
         # return save_new_command(data=data)

@@ -1,40 +1,41 @@
 from app.main import db
 import datetime
-
+from flask import jsonify
 from app.main.models.user import User
-
+import json
 
 def save_new_user(data):
-    user = User.query.filter_by(user_name=data['user_name']).first()
-    if not user:
-        new_user = User(
-            user_name=data['user_name'],
-            name=data['name'],
-            last_name=data['last_name'],
-            social_network_id=data['social_network_id'],
-        )
-        save_changes(new_user)
-        # response_object = {
-        #     'status': 'success',
-        #     'message': 'Successfully registered.'
-        # }
-        # return response_object, 201
-        return 0
-    else:
-        # response_object = {
-        #     'status': 'fail',
-        #     'message': 'user already exists. Please Log in.',
-        # }
-        # return response_object, 409
-        return 1
+    try:
+        if User.query.filter_by(user_name=data['user_name']) != None:
+            user = User.query.filter_by(user_name=data['user_name']).one()
+            return messsage(True,"exists",user.id)
+        else:
+            new_user = User(
+                user_name=data['user_name'],
+                name=data['name'],
+                last_name=data['last_name'],
+                social_network_id=data['social_network_id'],
+                )
+            save_changes(new_user)
+            user = get_user(data['user_name'])
+            return messsage(True,"created",user.id)
+        
+    except Exception as e:
+        return messsage_error('False',"error")
+
+def get_all_users():
+    return User.query.all()
+
+def get_user(user_name):
+    return User.query.filter_by(user_name=user_name).first()
 
 
-# def get_all_users():
-#     return user.query.all()
+def messsage(status,accion,user):
+    return {"status":status,"message":accion,"user_id":user}
 
+def messsage_error(status,accion):
+    return {"status":status,"message":accion}
 
-# def get_a_user(public_id):
-#     return user.query.filter_by(public_id=public_id).first()
 
 
 def save_changes(data):
