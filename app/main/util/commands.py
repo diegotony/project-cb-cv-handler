@@ -1,19 +1,23 @@
 from flask import jsonify
 import json
+import requests
+
 
 def prevencionTransporte():
     print("comando")
-    return "oka"
+    return get_data()
 
 
 def prevencionHogar():
     print("comando")
-    return "oka"
+    return get_data()
+
 
 
 def prevencionTrabajo():
     print("comando")
-    return "oka"
+    return get_data()
+
 
 
 def chProvincia():
@@ -89,9 +93,20 @@ def get_all_commands():
         "UltimasNoticias": ultimasNoticias,
     }
     lista = getList(switcher)
-    commands = [  i for i in lista]
+    commands = [i for i in lista]
     print(commands)
     return jsonify(commands)
 
-def getList(dict): 
-    return dict.keys() 
+
+def getList(dict):
+    return dict.keys()
+
+
+def get_data():
+    response = requests.get(
+        'http://covid-openknowledge.herokuapp.com/covidOpenKnowledge/api/v1/cuidados',
+
+    )
+    json_response = json.loads(response.text)
+
+    return  json_response['_embedded']['cuidados']
