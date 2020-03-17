@@ -41,6 +41,7 @@ class Command(Resource):
                 }
                 user = save_new_user(create_user)
                 command = commands(data['command'])
+                # interaction = save_new_interaction({"user":user['id'],"input_db":data['command'],"output":command})
                 return command
             
         except Exception as e:
@@ -48,6 +49,4 @@ class Command(Resource):
 
       
 
-        # interaction = save_new_interaction({"user":user['id'],"input_db":data['command'],"output":command})
 
-        # return save_new_command(data=data)
