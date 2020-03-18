@@ -8,9 +8,3 @@ class User(db.Model):
     name = db.Column(db.String(255))
     last_name= db.Column(db.String(255))
     social_network_id=db.Column(db.String(255))
-    
-
-"""
-{'user': {'user_name': 'astandre', 'name': 'André', 'last_name': 'Herrera', 'social_network_id': 614535395}, 'comando': '/PrevencionTransporte'}
-"""
-

@@ -2,22 +2,21 @@ from flask import jsonify
 import json
 import requests
 
+from .commands_data import commands_list
+URL = "http://covid-openknowledge.herokuapp.com/covidOpenKnowledge/api/v1/"
+
 
 def prevencionTransporte():
-    print("comando")
-    return get_data()
+    data = get_data("manerasPrevencion", "manerasPrevencion")
+    return data['transporte']
 
 
 def prevencionHogar():
     print("comando")
-    return get_data()
-
 
 
 def prevencionTrabajo():
     print("comando")
-    return get_data()
-
 
 
 def chProvincia():
@@ -60,53 +59,43 @@ def ultimasNoticias():
 
 
 def commands(argument):
-    switcher = {
-        "PrevencionTransporte": prevencionTransporte,
-        "PrevencionHogar": prevencionHogar,
-        "PrevencionTrabajo": prevencionTrabajo,
-        "CHProvincia": chProvincia,
-        "CHCiudad": chCiudad,
-        "sintomas": sintomas,
-        "HTEducacion": htEducacion,
-        "HTTeletrabajo": htTeletrabajo,
-        "estadoCuarentena": estadoCuarentena,
-        "MediosComunicacion": mediosComunicacion,
-        "UltimasNoticias": ultimasNoticias,
-    }
-    func = switcher.get(argument, lambda: "Invalid month")
+    func = switcher.get(argument, lambda: "Invalid command")
     # Execute the function
     return func()
 
 
 def get_all_commands():
-    switcher = {
-        "PrevencionTransporte": prevencionTransporte,
-        "PrevencionHogar": prevencionHogar,
-        "PrevencionTrabajo": prevencionTrabajo,
-        "CHProvincia": chProvincia,
-        "CHCiudad": chCiudad,
-        "sintomas": sintomas,
-        "HTEducacion": htEducacion,
-        "HTTeletrabajo": htTeletrabajo,
-        "estadoCuarentena": estadoCuarentena,
-        "MediosComunicacion": mediosComunicacion,
-        "UltimasNoticias": ultimasNoticias,
-    }
-    lista = getList(switcher)
-    commands = [i for i in lista]
+
+    # lista = getList(switcher)
+    # commands = [i for i in lista]
     print(commands)
-    return jsonify(commands)
+    return jsonify(commands_list)
 
 
 def getList(dict):
     return dict.keys()
 
 
-def get_data():
+def get_data(endpoint, group):
     response = requests.get(
-        'http://covid-openknowledge.herokuapp.com/covidOpenKnowledge/api/v1/manerasPrevencion',
-
+        URL+endpoint,
     )
     json_response = json.loads(response.text)
 
-    return  json_response['_embedded']['manerasPrevencion']
+    return json_response['_embedded'][group]
+
+
+
+switcher = {
+    "PrevencionTransporte": prevencionTransporte,
+    "PrevencionHogar": prevencionHogar,
+    "PrevencionTrabajo": prevencionTrabajo,
+    "CHProvincia": chProvincia,
+    "CHCiudad": chCiudad,
+    "sintomas": sintomas,
+    "HTEducacion": htEducacion,
+    "HTTeletrabajo": htTeletrabajo,
+    "estadoCuarentena": estadoCuarentena,
+    "MediosComunicacion": mediosComunicacion,
+    "UltimasNoticias": ultimasNoticias,
+}
