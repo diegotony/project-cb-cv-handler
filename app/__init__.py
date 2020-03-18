@@ -10,7 +10,7 @@ blueprint = Blueprint('api', __name__)
 api = Api(blueprint,
           title='FLASK RESTPLUS API',
           version='1.0',
-          description='a boilerplate for flask restplus web service'
+          description='channel handler'
           )
 
 api.add_namespace(interaction_ns, path='/interaction')
