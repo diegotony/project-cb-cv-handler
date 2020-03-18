@@ -20,7 +20,7 @@ MarkupSafe==1.1.1
 mysql-connector-python==8.0.19
 mysqlclient==1.4.6
 protobuf==3.6.1
-PyMySQL==0.9.3
+psycopg2
 pyrsistent==0.15.7
 python-dateutil==2.8.1
 python-editor==1.0.4
