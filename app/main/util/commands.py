@@ -104,9 +104,9 @@ def getList(dict):
 
 def get_data():
     response = requests.get(
-        'http://covid-openknowledge.herokuapp.com/covidOpenKnowledge/api/v1/cuidados',
+        'http://covid-openknowledge.herokuapp.com/covidOpenKnowledge/api/v1/manerasPrevencion',
 
     )
     json_response = json.loads(response.text)
 
-    return  json_response['_embedded']['cuidados']
+    return  json_response['_embedded']['manerasPrevencion']

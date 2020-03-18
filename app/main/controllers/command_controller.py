@@ -19,11 +19,11 @@ class CommandList(Resource):
 
 @api.route('/')
 class Command(Resource):
-    @api.doc('list_of_registered_commands')
-    def get(self):
-        """List all registered commands"""
+    # @api.doc('list_of_registered_commands')
+    # def get(self):
+    #     """List all registered commands"""
         
-        return get_all_users()
+    #     return get_all_users()
 
     @api.response(201, 'Interaction successfully created.')
     @api.doc('create interaction with command')

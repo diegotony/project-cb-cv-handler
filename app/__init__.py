@@ -13,5 +13,5 @@ api = Api(blueprint,
           description='channel handler'
           )
 
-api.add_namespace(interaction_ns, path='/interaction')
+# api.add_namespace(interaction_ns, path='/interaction')
 api.add_namespace(command_ns, path='/command')
