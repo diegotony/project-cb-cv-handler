@@ -8,7 +8,7 @@ from .main.controllers.command_controller import api as command_ns
 blueprint = Blueprint('api', __name__)
 
 api = Api(blueprint,
-          title='FLASK RESTPLUS API',
+          title='CHANNEL HANDLER FLASK RESTPLUS API',
           version='1.0',
           description='channel handler'
           )
