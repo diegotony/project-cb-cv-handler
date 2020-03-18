@@ -3,6 +3,7 @@ import datetime
 from flask import jsonify
 from app.main.models.user import User
 import json
+from sqlalchemy.exc import SQLAlchemyError
 
 
 def save_new_user(data):
@@ -24,9 +25,8 @@ def save_new_user(data):
                 return messsage(True, "exists", obtain_user.id)
             else:
                 return messsage_error(False,'error')
-    except Exception as e:
-        print(e)
-        return messsage_error('False', "error")
+    except SQLAlchemyError as e:
+        return messsage_error('False', e)
 
 
 def get_all_users():

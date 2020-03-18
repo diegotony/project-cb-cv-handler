@@ -35,7 +35,8 @@ class DevelopmentConfig(Config):
 class ProductionConfig(Config):
     # "mysql://user:password@mysql/db"
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + \
+        os.path.join(basedir, 'flask_boilerplate_main.db')
     SQLALCHEMY_POOL_RECYCLE = 280
     SQLALCHEMY_POOL_SIZE = 20
     SQLALCHEMY_TRACK_MODIFICATIONS = True

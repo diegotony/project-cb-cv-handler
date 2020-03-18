@@ -14,6 +14,7 @@ app.app_context().push()
 manager = Manager(app)
 
 migrate = Migrate(app, db)
+db.create_all()
 
 manager.add_command('db', MigrateCommand)
 

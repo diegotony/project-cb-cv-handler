@@ -5,6 +5,8 @@ from app.main.models.interaction import Interaction
 
 def save_new_interaction(data):
     interaction = Interaction.query.filter_by(user=data['user']).first()
+    
+
     if not interaction:
         new_Interaction = Interaction(
             user=data['user'],
