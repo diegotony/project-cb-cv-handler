@@ -1,10 +1,10 @@
 import os
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
+    from app import blueprint
 from app.main import create_app, db
 from app.main.models import user
 from app.main.models import interaction
-from app import blueprint
 
 app = create_app(os.getenv('BOILERPLATE_ENV') or 'prod')
 app.register_blueprint(blueprint)
