@@ -1,0 +1,32 @@
+version: '3.6'
+
+services:
+  apif:
+    build: .
+    environment:
+      STAGE: test
+      SQLALCHEMY_DATABASE_URI: mysql+pymysql://test:test@db/test
+    networks:
+      - default
+    ports:
+      - 5000:5000
+    restart: always
+    depends_on:
+      - db
+    links: 
+      - db
+
+  db:
+    image: mysql:5.7
+    container_name: db
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: test
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+      MYSQL_DATABASE_HOST: db
+      SERVER_HOST_NAME: db
