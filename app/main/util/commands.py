@@ -2,7 +2,7 @@ from flask import jsonify
 import random
 from .commands_data import commands_list
 from .api_requets import get_data
-from .utils import object_answer, array_answer, object_data_noticia
+from .utils import object_answer, array_answer, object_data_noticia, check_type
 
 
 def prevencionTransporte():
@@ -19,7 +19,7 @@ def prevencionHogar():
     hogar=[]
     for i in data:
         if i['lugar'] == "casa":
-            hogar.append(object_answer("text", i['manera']))
+            hogar.append(object_answer(check_type(i['manera']), i['manera']))
 
     list_five =random.sample(hogar,5)
 

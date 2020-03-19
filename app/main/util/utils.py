@@ -32,3 +32,15 @@ def array_interaccions(data):
             })
     # print(array_data)
     return {"data":array_data}
+
+def check_type(data):
+    if data[-3:] == "png":
+        return "image"
+    if data[-3:] == "jpg":
+        return "image"
+    if data[-4:] == "jpeg":
+        return "image"
+    if data[-4:] == "html":
+        return "link"
+    return "text"
+    
