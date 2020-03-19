@@ -3,44 +3,33 @@ import datetime
 
 from app.main.models.interaction import Interaction
 from sqlalchemy.exc import SQLAlchemyError
+from app.main.util.utils import messsage_error, messsage
 
 def save_new_interaction(data):
-    interaction = Interaction.query.filter_by(user_id=data['user_id']).first()
-
+    print(data)
     try:
-        if not interaction:
-            new_Interaction = Interaction(
-                user_id=data['user_id'],
-                input_db=data['input_db'],
-                output_db=data['output_db'],
-                registered_on=datetime.datetime.utcnow()
-            )
-            save_changes(new_Interaction)
-            response_object = {
-                'status': 'success',
-                'message': 'Successfully registered.'
-            }
-            return response_object, 201
-        else:
-            response_object = {
-                'status': 'fail',
-                'message': 'Interaction already exists. Please Log in.',
-            }
-            return response_object, 409
-    except Exception as e:
-        print(e)
+        new_interaction = Interaction(
+            user_id=data['user_id'],
+            input_db=data['input_db'],
+            output_db=data['output_db'],
+            registered_on=datetime.datetime.utcnow()
+        )
+        interaction = save_changes(new_interaction)
+        return {"status":True}
+    except SQLAlchemyError as e:
         return messsage_error('False', e)
 
+
 def get_all_interactions():
-    return Interaction.query.all()
+    data = Interaction.query.all()
+    return data
 
 
-def messsage_error(status, accion):
-    return {"status": status, "message": accion}
-
-def messsage(status, accion, user):
-    return {"status": status, "message": accion, "user_id": user}
 
 def save_changes(data):
     db.session.add(data)
     db.session.commit()
+    db.session.flush()
+    data.id
+    db.session.refresh(data)
+    return data.id

@@ -3,6 +3,7 @@ from flask_restplus import Resource
 
 from ..util.dto import CommandDto
 from ..util.commands import get_all_commands, commands
+from ..util.utils import messsage_error
 from ..services.user_service import save_new_user, get_all_users, messsage_error
 from ..services.interaction_service import save_new_interaction
 api = CommandDto.api
@@ -43,8 +44,19 @@ class Command(Resource):
 
                 user = save_new_user(create_user)
                 command = commands(data['command'])
-
-                # interaction = save_new_interaction({"user":user['id'],"input_db":data['command'],"output":command})
+                 
+                try:
+                    print(user)
+                    print(data['command'])
+                    print(command)
+                    create_interaction = {
+                        "user_id": int(user['id']), 
+                        "input_db": str(data['command']), 
+                        "output_db": command}
+                    interaction = save_new_interaction(create_interaction)
+                except Exception as e:
+                    return messsage_error("Error Save Interation",e)
+                
                 return command
 
         except Exception as e:

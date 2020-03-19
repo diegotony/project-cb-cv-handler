@@ -1,7 +1,7 @@
 from flask import jsonify
 from .commands_data import commands_list
 from .api_requets import get_data
-from .utils import object_data, array_data, object_data_noticia
+from .utils import  object_answer, array_answer, object_data_noticia
 
 
 def prevencionTransporte():
@@ -9,8 +9,8 @@ def prevencionTransporte():
     transporte = []
     for i in data:
         if i['lugar'] == "transporte":
-            transporte.append(object_data("text", i['manera']))
-    return array_data(transporte, "lo que diga Andrr")
+            transporte.append(object_answer("text", i['manera']))
+    return array_answer(transporte, "lo que diga Andrr")
 
 
 def prevencionHogar():
@@ -18,8 +18,8 @@ def prevencionHogar():
     hogar = []
     for i in data:
         if i['lugar'] == "casa":
-            hogar.append(object_data("text", i['manera']))
-    return array_data(hogar, "lo que diga Andrr")
+            hogar.append(object_answer("text", i['manera']))
+    return array_answer(hogar, "lo que diga Andrr")
 
 
 def prevencionTrabajo():
@@ -27,32 +27,32 @@ def prevencionTrabajo():
     trabajo = []
     for i in data:
         if i['lugar'] == "trabajo":
-            trabajo.append(object_data("text", i['manera']))
-    return array_data(trabajo, "lo que diga Andrr")
+            trabajo.append(object_answer("text", i['manera']))
+    return array_answer(trabajo, "lo que diga Andrr")
 
 
 def chProvincia():
     data = get_data("centrosHabilitados", "centrosHabilitados")
     ch = []
     for i in data:
-        ch.append(object_data("text", i['provincia']))
-    return array_data(ch, "lo que diga Andrr")
+        ch.append(object_answer("text", i['provincia']))
+    return array_answer(ch, "lo que diga Andrr")
 
 
 def chCiudad():
     data = get_data("centrosHabilitados", "centrosHabilitados")
     ch = []
     for i in data:
-        ch.append(object_data("text", i['ciudad']))
-    return array_data(ch, "lo que diga Andrr")
+        ch.append(object_answer("text", i['ciudad']))
+    return array_answer(ch, "lo que diga Andrr")
 
 
 def sintomas():
     data = get_data("sintomas", "sintomas")
     sintomas = []
     for i in data:
-        sintomas.append(object_data("text", i['nombre']))
-    return array_data(sintomas, "lo que diga Andrr")
+        sintomas.append(object_answer("text", i['nombre']))
+    return array_answer(sintomas, "lo que diga Andrr")
 
 
 def htEducacion():
@@ -73,19 +73,18 @@ def mediosComunicacion():
     data = get_data("mediosComunicacion", "mediosComunicacion")
     sintomas = []
     for i in data:
-        sintomas.append(object_data("text", i['nombre']))
-    return array_data(sintomas, "lo que diga Andrr")
+        sintomas.append(object_answer("text", i['nombre']))
+    return array_answer(sintomas, "lo que diga Andrr")
 
 
 def ultimasNoticias():
     data = get_data("noticias", "noticias")
     ultima = data[-1]
-    return array_data((object_data_noticia("text", ultima['titulo'], ultima['resumen'], ultima['fuente'], ultima['fecha'])), "lo que diga Andrr")
+    return array_answer((object_data_noticia("text", ultima['titulo'], ultima['resumen'], ultima['fuente'], ultima['fecha'])), "lo que diga Andrr")
 
 
 def commands(argument):
     func = switcher.get(argument, lambda: {"error": "Invalid command"})
-    # Execute the function
     return func()
 
 

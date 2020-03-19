@@ -4,7 +4,7 @@ from flask import jsonify
 from app.main.models.user import User
 import json
 from sqlalchemy.exc import SQLAlchemyError
-
+from app.main.util.utils import messsage_error, messsage
 
 def save_new_user(data):
     try:
@@ -38,14 +38,6 @@ def get_user(user_name):
 
 def get_id(id):
     return User.query.get(int(id))
-
-def messsage(status, accion, user):
-    return {"status": status, "message": accion, "user_id": user}
-
-
-def messsage_error(status, accion):
-    return {"status": status, "message": accion}
-
 
 def save_changes(data):
     db.session.add(data)
