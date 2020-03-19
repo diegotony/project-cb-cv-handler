@@ -81,11 +81,11 @@ def estadoCuarentena():
 
 def mediosComunicacion():
     data = get_data("mediosComunicacion", "mediosComunicacion")
-    sintomas = []
+    medios = []
+    print(data)
     for i in data:
-        if check_type(i['nombre']) == "text":
-            sintomas.append(object_answer("text", i['nombre'] + "({0})".format(i['web'])))
-    return array_answer(sintomas, "Informate de Medios de Comunicacion oficiales:")
+        medios.append(object_answer("text", i['nombre'] + " ({0})".format(i['redes']['web'])))
+    return array_answer(medios, "Informate de Medios de Comunicacion oficiales:")
 
 
 def ultimasNoticias():
