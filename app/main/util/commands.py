@@ -1,7 +1,8 @@
 from flask import jsonify
+import random
 from .commands_data import commands_list
 from .api_requets import get_data
-from .utils import  object_answer, array_answer, object_data_noticia
+from .utils import object_answer, array_answer, object_data_noticia
 
 
 def prevencionTransporte():
@@ -10,16 +11,19 @@ def prevencionTransporte():
     for i in data:
         if i['lugar'] == "transporte":
             transporte.append(object_answer("text", i['manera']))
-    return array_answer(transporte, "lo que diga Andrr")
+    return array_answer(transporte, "Estas son las medidas de prevencion en el transporte:")
 
 
 def prevencionHogar():
     data = get_data("manerasPrevencion", "manerasPrevencion")
-    hogar = []
+    hogar=[]
     for i in data:
         if i['lugar'] == "casa":
             hogar.append(object_answer("text", i['manera']))
-    return array_answer(hogar, "lo que diga Andrr")
+
+    list_five =random.sample(hogar,5)
+
+    return array_answer(list_five, "Estas son las medidas de prevencion en el trabajo:")
 
 
 def prevencionTrabajo():
@@ -28,7 +32,7 @@ def prevencionTrabajo():
     for i in data:
         if i['lugar'] == "trabajo":
             trabajo.append(object_answer("text", i['manera']))
-    return array_answer(trabajo, "lo que diga Andrr")
+    return array_answer(trabajo, "Estas son las medidas de prevencion en el hogar:")
 
 
 def chProvincia():
@@ -36,7 +40,7 @@ def chProvincia():
     ch = []
     for i in data:
         ch.append(object_answer("text", i['provincia']))
-    return array_answer(ch, "lo que diga Andrr")
+    return array_answer(ch, "Estos son los centros habilitados en las diferentes provincias del Ecuador")
 
 
 def chCiudad():
@@ -44,7 +48,7 @@ def chCiudad():
     ch = []
     for i in data:
         ch.append(object_answer("text", i['ciudad']))
-    return array_answer(ch, "lo que diga Andrr")
+    return array_answer(ch, "Estos son los centros habilitados en las diferentes ciudades del Ecuador")
 
 
 def sintomas():
@@ -52,7 +56,7 @@ def sintomas():
     sintomas = []
     for i in data:
         sintomas.append(object_answer("text", i['nombre']))
-    return array_answer(sintomas, "lo que diga Andrr")
+    return array_answer(sintomas, "No tiene")
 
 
 def htEducacion():
@@ -74,13 +78,19 @@ def mediosComunicacion():
     sintomas = []
     for i in data:
         sintomas.append(object_answer("text", i['nombre']))
-    return array_answer(sintomas, "lo que diga Andrr")
+    return array_answer(sintomas, "Informate de Medios de Comunicacion oficiales:")
 
 
 def ultimasNoticias():
     data = get_data("noticias", "noticias")
     ultima = data[-1]
-    return array_answer((object_data_noticia("text", ultima['titulo'], ultima['resumen'], ultima['fuente'], ultima['fecha'])), "lo que diga Andrr")
+    return array_answer((
+        object_data_noticia(
+            "text", ultima['titulo'],
+            ultima['resumen'],
+            ultima['fuente'],
+            ultima['fecha'])),
+        "Ultimas noticias del covid-19 en el Ecuador")
 
 
 def commands(argument):
