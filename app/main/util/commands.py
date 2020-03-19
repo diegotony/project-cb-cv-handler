@@ -29,13 +29,19 @@ def prevencionTrabajo():
 
 
 def chProvincia():
-    print("comando")
-    return "oka"
+    data = get_data("centrosHabilitados", "centrosHabilitados")
+    ch=[]
+    for i in data:
+        ch.append(object_data("text",i['provincia']))
+    return array_data(ch,"lo que diga Andrr")
 
 
 def chCiudad():
-    print("comando")
-    return "oka"
+    data = get_data("centrosHabilitados", "centrosHabilitados")
+    ch=[]
+    for i in data:
+        ch.append(object_data("text",i['ciudad']))
+    return array_data(ch,"lo que diga Andrr")
 
 
 def sintomas():
