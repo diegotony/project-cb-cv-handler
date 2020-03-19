@@ -46,9 +46,9 @@ class Command(Resource):
                 command = commands(data['command'])
                  
                 try:
-                    print(user)
-                    print(data['command'])
-                    print(command)
+                    # print(user)
+                    # print(data['command'])
+                    # print(command)
                     create_interaction = {
                         "user_id": int(user['id']), 
                         "input_db": str(data['command']), 

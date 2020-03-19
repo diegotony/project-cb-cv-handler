@@ -34,6 +34,8 @@ def array_interaccions(data):
     return {"data":array_data}
 
 def check_type(data):
+    if data[0:4] == "http":
+        return "link"
     if data[-3:] == "png":
         return "image"
     if data[-3:] == "jpg":

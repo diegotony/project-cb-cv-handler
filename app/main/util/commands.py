@@ -10,7 +10,8 @@ def prevencionTransporte():
     transporte = []
     for i in data:
         if i['lugar'] == "transporte":
-            transporte.append(object_answer("text", i['manera']))
+            if check_type(i['manera']) == "text":
+                transporte.append(object_answer("text", i['manera']))
     return array_answer(transporte, "Estas son las medidas de prevencion en el transporte:")
 
 
@@ -19,7 +20,8 @@ def prevencionHogar():
     hogar=[]
     for i in data:
         if i['lugar'] == "casa":
-            hogar.append(object_answer(check_type(i['manera']), i['manera']))
+            if check_type(i['manera']) == "text":
+                hogar.append(object_answer(check_type(i['manera']), i['manera']))
 
     list_five =random.sample(hogar,5)
 
@@ -31,7 +33,8 @@ def prevencionTrabajo():
     trabajo = []
     for i in data:
         if i['lugar'] == "trabajo":
-            trabajo.append(object_answer("text", i['manera']))
+            if check_type(i['manera']) == "text":
+                trabajo.append(object_answer("text", i['manera']))
     return array_answer(trabajo, "Estas son las medidas de prevencion en el hogar:")
 
 
@@ -39,7 +42,8 @@ def chProvincia():
     data = get_data("centrosHabilitados", "centrosHabilitados")
     ch = []
     for i in data:
-        ch.append(object_answer("text", i['provincia']))
+        if check_type(i['provincia']) == "text":
+            ch.append(object_answer("text", i['provincia']))
     return array_answer(ch, "Estos son los centros habilitados en las diferentes provincias del Ecuador")
 
 
@@ -47,7 +51,8 @@ def chCiudad():
     data = get_data("centrosHabilitados", "centrosHabilitados")
     ch = []
     for i in data:
-        ch.append(object_answer("text", i['ciudad']))
+        if check_type(i['ciudad']) == "text":
+            ch.append(object_answer("text", i['ciudad']))
     return array_answer(ch, "Estos son los centros habilitados en las diferentes ciudades del Ecuador")
 
 
@@ -55,8 +60,8 @@ def sintomas():
     data = get_data("sintomas", "sintomas")
     sintomas = []
     for i in data:
-        if i['tipo']=="texto":
-            sintomas.append(object_answer("text", i['nombre']))
+        if check_type(i['nombre']) == "text":
+            sintomas.append(object_answer(check_type(i['nombre']), i['nombre']))
 
     return array_answer(sintomas, "No tiene")
 
@@ -79,7 +84,8 @@ def mediosComunicacion():
     data = get_data("mediosComunicacion", "mediosComunicacion")
     sintomas = []
     for i in data:
-        sintomas.append(object_answer("text", i['nombre']))
+        if check_type(i['nombre']) == "text":
+            sintomas.append(object_answer("text", i['nombre']))
     return array_answer(sintomas, "Informate de Medios de Comunicacion oficiales:")
 
 
