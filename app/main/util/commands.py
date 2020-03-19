@@ -71,7 +71,7 @@ def ultimasNoticias():
 
 
 def commands(argument):
-    func = switcher.get(argument, lambda: "Invalid command")
+    func = switcher.get(argument, lambda: {"error":"Invalid command"})
     # Execute the function
     return func()
 
