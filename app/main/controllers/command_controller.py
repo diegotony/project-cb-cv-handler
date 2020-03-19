@@ -39,8 +39,10 @@ class Command(Resource):
                     "last_name": data['last_name'],
                     "social_network_id": data['social_network_id'],
                 }
+                
                 user = save_new_user(create_user)
                 command = commands(data['command'])
+
                 # interaction = save_new_interaction({"user":user['id'],"input_db":data['command'],"output":command})
                 return command
             

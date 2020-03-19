@@ -1,19 +1,23 @@
 from flask import jsonify
-import json
-import requests
-
 from .commands_data import commands_list
+from .api_requets import get_data
+from .utils import object_data
+
 URL = "http://covid-openknowledge.herokuapp.com/covidOpenKnowledge/api/v1/"
 
 
 def prevencionTransporte():
     data = get_data("manerasPrevencion", "manerasPrevencion")
-    return data['transporte']
-
+    trabajo=[]
+    for i in data:
+        if i['lugar'] == "trabajo":
+            trabajo.append(object_data("text",i['manera'],"nope"))
+    return trabajo
 
 def prevencionHogar():
-    print("comando")
-
+    # data = get_data("manerasPrevencion", "manerasPrevencion")
+    # return data['transporte']
+    pass
 
 def prevencionTrabajo():
     print("comando")
@@ -65,9 +69,6 @@ def commands(argument):
 
 
 def get_all_commands():
-
-    # lista = getList(switcher)
-    # commands = [i for i in lista]
     print(commands)
     return jsonify(commands_list)
 
@@ -75,14 +76,6 @@ def get_all_commands():
 def getList(dict):
     return dict.keys()
 
-
-def get_data(endpoint, group):
-    response = requests.get(
-        URL+endpoint,
-    )
-    json_response = json.loads(response.text)
-
-    return json_response['_embedded'][group]
 
 
 
@@ -99,3 +92,4 @@ switcher = {
     "MediosComunicacion": mediosComunicacion,
     "UltimasNoticias": ultimasNoticias,
 }
+
