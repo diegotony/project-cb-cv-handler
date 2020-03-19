@@ -42,8 +42,12 @@ def chCiudad():
 
 
 def sintomas():
-    print("comando")
-    return "oka"
+    data = get_data("sintomas", "sintomas")
+    print(data)
+    sintomas=[]
+    # for i in data:
+    #     sintomas.append(object_data("text",i['nombre']))
+    # return array_data(sintomas,"lo que diga Andrr")
 
 
 def htEducacion():

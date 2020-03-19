@@ -3,10 +3,11 @@ from flask_restplus import Resource
 
 from ..util.dto import CommandDto
 from ..util.commands import get_all_commands, commands
-from ..services.user_service import save_new_user, get_all_users,messsage_error
+from ..services.user_service import save_new_user, get_all_users, messsage_error
 from ..services.interaction_service import save_new_interaction
 api = CommandDto.api
 _command = CommandDto.command
+
 
 @api.route('/list')
 class CommandList(Resource):
@@ -22,7 +23,7 @@ class Command(Resource):
     # @api.doc('list_of_registered_commands')
     # def get(self):
     #     """List all registered commands"""
-        
+
     #     return get_all_users()
 
     @api.response(201, 'Interaction successfully created.')
@@ -39,16 +40,12 @@ class Command(Resource):
                     "last_name": data['last_name'],
                     "social_network_id": data['social_network_id'],
                 }
-                
+
                 user = save_new_user(create_user)
                 command = commands(data['command'])
 
                 # interaction = save_new_interaction({"user":user['id'],"input_db":data['command'],"output":command})
                 return command
-            
+
         except Exception as e:
-            return messsage_error("false",e)
-
-      
-
-
+            return messsage_error("false", e)
