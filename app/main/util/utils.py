@@ -43,4 +43,4 @@ def check_type(data):
     if data[-4:] == "html":
         return "link"
     return "text"
-    
+

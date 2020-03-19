@@ -55,7 +55,9 @@ def sintomas():
     data = get_data("sintomas", "sintomas")
     sintomas = []
     for i in data:
-        sintomas.append(object_answer("text", i['nombre']))
+        if i['tipo']=="texto":
+            sintomas.append(object_answer("text", i['nombre']))
+
     return array_answer(sintomas, "No tiene")
 
 
