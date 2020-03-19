@@ -1,34 +1,34 @@
 from flask import jsonify
 from .commands_data import commands_list
 from .api_requets import get_data
-from .utils import object_data
+from .utils import object_data,array_data
 
 URL = "http://covid-openknowledge.herokuapp.com/covidOpenKnowledge/api/v1/"
 
 
 def prevencionTransporte():
     data = get_data("manerasPrevencion", "manerasPrevencion")
-    trabajo=[]
+    transporte=[]
     for i in data:
         if i['lugar'] == "transporte":
-            trabajo.append(object_data("text",i['manera'],"nope"))
-    return trabajo
+            transporte.append(object_data("text",i['manera']))
+    return array_data(transporte,"lo que diga Andrr")
 
 def prevencionHogar():
     data = get_data("manerasPrevencion", "manerasPrevencion")
-    trabajo=[]
+    hogar=[]
     for i in data:
         if i['lugar'] == "casa":
-            trabajo.append(object_data("text",i['manera'],"nope"))
-    return trabajo
+            hogar.append(object_data("text",i['manera']))
+    return array_data(hogar,"lo que diga Andrr")
 
 def prevencionTrabajo():
     data = get_data("manerasPrevencion", "manerasPrevencion")
     trabajo=[]
     for i in data:
         if i['lugar'] == "trabajo":
-            trabajo.append(object_data("text",i['manera'],"nope"))
-    return trabajo
+            trabajo.append(object_data("text",i['manera']))
+    return array_data(trabajo,"lo que diga Andrr")
 
 
 def chProvincia():
@@ -88,16 +88,16 @@ def getList(dict):
 
 
 switcher = {
-    "PrevencionTransporte": prevencionTransporte,
-    "PrevencionHogar": prevencionHogar,
-    "PrevencionTrabajo": prevencionTrabajo,
-    "CHProvincia": chProvincia,
-    "CHCiudad": chCiudad,
+    "transporte": prevencionTransporte,
+    "hogar": prevencionHogar,
+    "trabajo": prevencionTrabajo,
+    "provincia": chProvincia,
+    "ciudad": chCiudad,
     "sintomas": sintomas,
-    "HTEducacion": htEducacion,
-    "HTTeletrabajo": htTeletrabajo,
+    "educacion": htEducacion,
+    "teletrabajo": htTeletrabajo,
     "estadoCuarentena": estadoCuarentena,
-    "MediosComunicacion": mediosComunicacion,
-    "UltimasNoticias": ultimasNoticias,
+    "medios": mediosComunicacion,
+    "ultimasNoticias": ultimasNoticias,
 }
 

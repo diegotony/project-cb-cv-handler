@@ -8,5 +8,4 @@ def get_data(endpoint, group):
         URL+endpoint,
     )
     json_response = json.loads(response.text)
-    print(json_response)
     return json_response['_embedded'][group]
