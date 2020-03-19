@@ -42,8 +42,7 @@ def chProvincia():
     data = get_data("centrosHabilitados", "centrosHabilitados")
     ch = []
     for i in data:
-        if check_type(i['provincia']) == "text":
-            ch.append(object_answer("text", i['hospital'+"({0})".format(i['provincia'])]))
+        ch.append(object_answer("text", i['hospital']+"({0})".format(i['provincia'])))
     return array_answer(ch, "Estos son los centros habilitados en las diferentes provincias del Ecuador")
 
 
@@ -52,7 +51,7 @@ def chCiudad():
     ch = []
     for i in data:
         if check_type(i['ciudad']) == "text":
-            ch.append(object_answer("text", i['hospital'+"({0})".format(i['ciudad'])]))
+            ch.append(object_answer("text", i['hospital']+"({0})".format(i['ciudad'])))
     return array_answer(ch, "Estos son los centros habilitados en las diferentes ciudades del Ecuador")
 
 
@@ -99,6 +98,9 @@ def ultimasNoticias():
 
     return array_answer(ultimas,"Ultimas noticias del covid-19 en el Ecuador")
 
+def reportarCaso():
+    pass
+
 
 def commands(argument):
     func = switcher.get(argument, lambda: {"error": "Invalid command"})
@@ -108,10 +110,6 @@ def commands(argument):
 def get_all_commands():
     print(commands)
     return jsonify(commands_list)
-
-
-def getList(dict):
-    return dict.keys()
 
 
 switcher = {
@@ -126,4 +124,5 @@ switcher = {
     "estadoCuarentena": estadoCuarentena,
     "medios": mediosComunicacion,
     "ultimasNoticias": ultimasNoticias,
+    "reportar":reportarCaso,
 }
