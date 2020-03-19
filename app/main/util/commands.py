@@ -1,7 +1,7 @@
 from flask import jsonify
 from .commands_data import commands_list
 from .api_requets import get_data
-from .utils import object_data, array_data
+from .utils import object_data, array_data, object_data_noticia
 
 
 def prevencionTransporte():
@@ -78,8 +78,9 @@ def mediosComunicacion():
 
 
 def ultimasNoticias():
-    print("comando")
-    return "oka"
+    data = get_data("noticias", "noticias")
+    ultima = data[-1]
+    return array_data((object_data_noticia("text", ultima['titulo'], ultima['resumen'], ultima['fuente'], ultima['fecha'])), "lo que diga Andrr")
 
 
 def commands(argument):
