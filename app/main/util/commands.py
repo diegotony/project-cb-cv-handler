@@ -10,17 +10,25 @@ def prevencionTransporte():
     data = get_data("manerasPrevencion", "manerasPrevencion")
     trabajo=[]
     for i in data:
-        if i['lugar'] == "trabajo":
+        if i['lugar'] == "transporte":
             trabajo.append(object_data("text",i['manera'],"nope"))
     return trabajo
 
 def prevencionHogar():
-    # data = get_data("manerasPrevencion", "manerasPrevencion")
-    # return data['transporte']
-    pass
+    data = get_data("manerasPrevencion", "manerasPrevencion")
+    trabajo=[]
+    for i in data:
+        if i['lugar'] == "casa":
+            trabajo.append(object_data("text",i['manera'],"nope"))
+    return trabajo
 
 def prevencionTrabajo():
-    print("comando")
+    data = get_data("manerasPrevencion", "manerasPrevencion")
+    trabajo=[]
+    for i in data:
+        if i['lugar'] == "trabajo":
+            trabajo.append(object_data("text",i['manera'],"nope"))
+    return trabajo
 
 
 def chProvincia():
