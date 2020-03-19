@@ -3,9 +3,6 @@ from .commands_data import commands_list
 from .api_requets import get_data
 from .utils import object_data,array_data
 
-URL = "http://covid-openknowledge.herokuapp.com/covidOpenKnowledge/api/v1/"
-
-
 def prevencionTransporte():
     data = get_data("manerasPrevencion", "manerasPrevencion")
     transporte=[]
@@ -45,9 +42,9 @@ def sintomas():
     data = get_data("sintomas", "sintomas")
     print(data)
     sintomas=[]
-    # for i in data:
-    #     sintomas.append(object_data("text",i['nombre']))
-    # return array_data(sintomas,"lo que diga Andrr")
+    for i in data:
+        sintomas.append(object_data("text",i['nombre']))
+    return array_data(sintomas,"lo que diga Andrr")
 
 
 def htEducacion():
