@@ -12,10 +12,8 @@ class InteractionList(Resource):
     @api.doc('list_of_registered_interactions')
     def get(self):
         """List all registered interactions"""
-        data =get_all_interactions()
+        data = get_all_interactions()
         array = array_interaccions(data)
 
         return array
-        # return 
-
-
+        # return
