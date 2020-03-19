@@ -43,7 +43,7 @@ def chProvincia():
     ch = []
     for i in data:
         if check_type(i['provincia']) == "text":
-            ch.append(object_answer("text", i['provincia']))
+            ch.append(object_answer("text", i['hospital'+"({0})".format(i['provincia'])]))
     return array_answer(ch, "Estos son los centros habilitados en las diferentes provincias del Ecuador")
 
 
@@ -52,7 +52,7 @@ def chCiudad():
     ch = []
     for i in data:
         if check_type(i['ciudad']) == "text":
-            ch.append(object_answer("text", i['ciudad']))
+            ch.append(object_answer("text", i['hospital'+"({0})".format(i['ciudad'])]))
     return array_answer(ch, "Estos son los centros habilitados en las diferentes ciudades del Ecuador")
 
 
@@ -85,20 +85,19 @@ def mediosComunicacion():
     sintomas = []
     for i in data:
         if check_type(i['nombre']) == "text":
-            sintomas.append(object_answer("text", i['nombre']))
+            sintomas.append(object_answer("text", i['nombre'] + "({0})".format(i['web'])))
     return array_answer(sintomas, "Informate de Medios de Comunicacion oficiales:")
 
 
 def ultimasNoticias():
     data = get_data("noticias", "noticias")
-    ultima = data[-1]
-    return array_answer((
-        object_data_noticia(
-            "text", ultima['titulo'],
-            ultima['resumen'],
-            ultima['fuente'],
-            ultima['fecha'])),
-        "Ultimas noticias del covid-19 en el Ecuador")
+    ultimas = []
+    for i in data:
+        ultimas.append(object_answer("text","{0} ({1})".format(i['titulo'],i['fuente'])))
+    # ultimas.append(object_answer("text","{0} ({1})".format(data[-2]['titulo'],data[-1]['fuente'])))
+    # ultimas.append(object_answer("text","{0} ({1})".format(data[-3]['titulo'],data[-1]['fuente'])))
+
+    return array_answer(ultimas,"Ultimas noticias del covid-19 en el Ecuador")
 
 
 def commands(argument):

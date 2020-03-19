@@ -6,7 +6,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from app.main.util.utils import messsage_error, messsage
 
 def save_new_interaction(data):
-    print(data)
+    # print(data)
     try:
         new_interaction = Interaction(
             user_id=data['user_id'],
