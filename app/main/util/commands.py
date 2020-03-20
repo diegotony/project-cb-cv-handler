@@ -123,6 +123,6 @@ switcher = {
     "teletrabajo": htTeletrabajo,
     "estadoCuarentena": estadoCuarentena,
     "medios": mediosComunicacion,
-    "ultimasNoticias": ultimasNoticias,
+    "ultimasnoticias": ultimasNoticias,
     "reportar":reportarCaso,
 }
