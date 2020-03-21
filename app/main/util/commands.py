@@ -66,13 +66,23 @@ def sintomas():
 
 
 def htEducacion():
-    print("comando")
-    return "oka"
+    data = get_data("herramientas", "herramientas")
+    educacion = []
+    for i in data:
+        if i['categoria'] == "educacion":
+            educacion.append(object_answer("text", i['nombre']+ " ({0})".format(i['fuente'])))
+
+    return array_answer(educacion, "Esta es una lista de herramientas para usar en la educacion a distancia")
 
 
 def htTeletrabajo():
-    print("comando")
+    data = get_data("herramientas", "herramientas")
+    educacion = []
+    for i in data:
+        if i['categoria'] == "trabajo":
+            educacion.append(object_answer("text", i['nombre']+ " ({0})".format(i['fuente'])))
 
+    return array_answer(educacion, " Estas son herramientas para continuar con tus actividades por teletrabajo")
 
 def estadoCuarentena():
     print("comando")
