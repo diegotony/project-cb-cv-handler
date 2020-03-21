@@ -91,10 +91,13 @@ def mediosComunicacion():
 def ultimasNoticias():
     data = get_data("noticias", "noticias")
     ultimas = []
-    for i in data:
-        ultimas.append(object_answer("text","{0} ({1})".format(i['titulo'],i['fuente'])))
-    # ultimas.append(object_answer("text","{0} ({1})".format(data[-2]['titulo'],data[-1]['fuente'])))
-    # ultimas.append(object_answer("text","{0} ({1})".format(data[-3]['titulo'],data[-1]['fuente'])))
+    # for i in data:
+    #     ultimas.append(object_answer("text","{0} ({1})".format(i['titulo'],i['fuente'])))
+    ultimas.append(object_answer("text","{0} ({1})".format(data[-1]['titulo'],data[-1]['fuente'])))
+    ultimas.append(object_answer("text","{0} ({1})".format(data[-2]['titulo'],data[-1]['fuente'])))
+    ultimas.append(object_answer("text","{0} ({1})".format(data[-3]['titulo'],data[-1]['fuente'])))
+    ultimas.append(object_answer("text","{0} ({1})".format(data[-4]['titulo'],data[-1]['fuente'])))
+    ultimas.append(object_answer("text","{0} ({1})".format(data[-5]['titulo'],data[-1]['fuente'])))
 
     return array_answer(ultimas,"Ultimas noticias del covid-19 en el Ecuador")
 
