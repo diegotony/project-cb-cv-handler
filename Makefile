@@ -1,19 +1,15 @@
 .PHONY: clean up-db system-packages python-packages install  run all init
 
-clean:
-	rm -r migrations
-	rm -r app/main/flask_boilerplate_main.db
-	find . -type f -name '*.pyc' -delete
-	find . -type f -name '*.log' -delete
-
-system-packages:
-	sudo apt install python-pip -y
+env:
+	virtualenv -p python3.7 $@
+	${MAKE} python-install-req
 
 
-python-packages:
-	pip install -r requirements.txt
+python-install-req:
+	env/bin/pip install -r requirements.txt
 
-install: system-packages python-packages
+clean_env:
+	rm -rdvf env
 
 up-db:
 	python manage.py db init
@@ -21,7 +17,5 @@ up-db:
 	python manage.py db upgrade
 
 run:
-	python manage.py run
-	# gunicorn -w 4 -b localhost:5000 "manage:app"
+	python manage.py runserver --host 0.0.0.0 --port ${PORT}
 
-all: up-db run
