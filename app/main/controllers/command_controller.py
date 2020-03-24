@@ -21,6 +21,7 @@ class CommandList(Resource):
 
 @api.route('/')
 class Command(Resource):
+    # * Not expose /get of all users
     # @api.doc('list_of_registered_commands')
     # def get(self):
     #     """List all registered commands"""
