@@ -1,32 +1,34 @@
 version: '3.6'
 
 services:
-  apif:
+  channel:
     build: .
     environment:
-      STAGE: test
-      SQLALCHEMY_DATABASE_URI: mysql+pymysql://test:test@db/test
+      SQLALCHEMY_DATABASE_URI: postgres://postgres:changeme@postgres/test
     networks:
       - default
     ports:
       - 5000:5000
     restart: always
     depends_on:
-      - db
+      - postgres
     links: 
-      - db
+      - postgres
 
-  db:
-    image: mysql:5.7
-    container_name: db
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    ports:
-      - 3306:3306
+  postgres:
+    container_name: postgres
+    image: postgres:12.2
     environment:
-      MYSQL_ROOT_PASSWORD: test
-      MYSQL_DATABASE: test
-      MYSQL_USER: test
-      MYSQL_PASSWORD: test
-      MYSQL_DATABASE_HOST: db
-      SERVER_HOST_NAME: db
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      PGDATA: /data/postgres
+    volumes:
+       - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - default
+    restart: unless-stopped
+
+volumes:
+  postgres:
